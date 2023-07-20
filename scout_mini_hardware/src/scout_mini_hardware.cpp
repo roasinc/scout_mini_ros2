@@ -292,25 +292,25 @@ void ScoutMiniHardware::receive()
           robotState(data);
           break;
         case 0x251:  // front right motor
-          motorState(1, data);
+          motorState(2, data);
           break;
         case 0x252:  // front left motor
           motorState(0, data);
           break;
         case 0x253:  // rear left motor
-          motorState(2, data);
+          motorState(1, data);
           break;
         case 0x254:  // rear right motor
           motorState(3, data);
           break;
         case 0x261:  // front right motor
-          driverState(1, data);
+          driverState(2, data);
           break;
         case 0x262:  // front left motor
           driverState(0, data);
           break;
         case 0x263:  // rear left motor
-          driverState(2, data);
+          driverState(1, data);
           break;
         case 0x264:  // rear right motor
           driverState(3, data);

@@ -1,7 +1,7 @@
 # scout_mini_ros2
-[![Licence](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0/)
-[![ubuntu20](https://img.shields.io/badge/-UBUNTU%2020%2E04-blue?style=flat-square&logo=ubuntu&logoColor=white)](https://releases.ubuntu.com/focal/)
-[![humble](https://img.shields.io/badge/-HUMBLE-orange?style=flat-square&logo=ros)](https://docs.ros.org/en/humble/index.html)
+[![Licence](https://img.shields.io/badge/License-Apache_2.0-green.svg)](https://opensource.org/licenses/Apache-2.0/)
+[![ubuntu22](https://img.shields.io/badge/-UBUNTU_22.04-orange?style=flat-square&logo=ubuntu&logoColor=white)](https://releases.ubuntu.com/jammy/)
+[![humble](https://img.shields.io/badge/-HUMBLE-blue?style=flat-square&logo=ros)](https://docs.ros.org/en/humble/index.html)
 
 ## Overview
 ROS2 packages for Scout Mini
