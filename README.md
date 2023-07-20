@@ -6,8 +6,6 @@
 ## Overview
 ROS2 packages for Scout Mini
 
-Manual
-
 [Specification](https://roas.co.kr/scout-mini/)
 
 ## Installation
