@@ -7,6 +7,7 @@
 ROS2 packages for Scout Mini
 
 Manual
+
 [Specification](https://roas.co.kr/scout-mini/)
 
 ## Installation
@@ -22,5 +23,5 @@ colcon build --symlink-install
 ## Usage
 ```
 sudo ip link set can0 up type can bitrate 500000
-roslaunch scout_mini_base base.launch
+ros2 launch scout_mini_base base_launch.py
 ```
