@@ -18,7 +18,7 @@
   <depend>std_msgs</depend>
   <depend>can_msgs</depend>
   <depend>ros2_socketcan</depend>
-  <depend>scout_mini_msgs</depend>
+  <depend>ros2_socketcan_msgs</depend>
 
   <export>
     <build_type>ament_cmake</build_type>

@@ -18,6 +18,7 @@ set(
   std_msgs
   can_msgs
   ros2_socketcan
+  ros2_socketcan_msgs
   scout_mini_msgs
 )
 
