@@ -9,16 +9,21 @@ ROS2 packages for Scout Mini
 [Specification](https://roas.co.kr/scout-mini/)
 
 ## Installation
+
+### Install packages
 ```
-# Install packages
 cd ~/colcon_ws/src
 git clone https://github.com/roasinc/scout_mini_ros2.git
+```
 
-# Install dependencies
+### Install dependencies
+```
 sudo apt install python3-vcstool
 vcs import ~/colcon_ws/src < ~/colcon_ws/src/scout_mini_ros2/requirement.rosinstall
+```
 
-# Build
+### Build
+```
 cd ~/colcon_ws/
 rosdep install --from-paths src --ignore-src -y
 colcon build --symlink-install
