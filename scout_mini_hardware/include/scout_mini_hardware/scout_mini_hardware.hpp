@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SCOUT_MINI_HARDWARE__SCOUt_MINI_HAREWARE_HPP_
-#define SCOUT_MINI_HARDWARE__SCOUt_MINI_HAREWARE_HPP_
+#ifndef SCOUT_MINI_HARDWARE__SCOUT_MINI_HAREWARE_HPP_
+#define SCOUT_MINI_HARDWARE__SCOUT_MINI_HAREWARE_HPP_
 
 #include <string>
 #include <vector>
@@ -82,32 +82,40 @@ public:
   void receive();
 
   /**
-   * \brief Parse robot state data
+   * \brief Parse the robot state message
+   * \param data Robot state message converted to binary number
    */
   void robotState(uint8_t* data);
 
   /**
-   * \brief Parse motor state data
+   * \brief Parse the motor state message
+   * \param index Index of motor
+   * \param data Motor state converted to binary number
    */
   void motorState(size_t index, uint8_t* data);
 
   /**
-   * \brief Parse driver state data
+   * \brief Parse the driver state message
+   * \param index Index of driver
+   * \param data Driver state converted to binary number
    */
   void driverState(size_t index, uint8_t* data);
 
   /**
-   * \brief Parse light state data
+   * \brief Parse the light state message
+   * \param data Light state message converted to binary number
    */
   void lightState(uint8_t* data);
 
   /**
-   * \brief Parse velocity data
+   * \brief Parse the velocity message
+   * \param data Velocity message converted to binary number
    */
   void velocity(uint8_t* data);
 
   /**
-   * \brief Parse position data
+   * \brief Parse the position message
+   * \param data Position message converted to binary number
    */
   void position(uint8_t* data);
 
@@ -124,9 +132,6 @@ public:
 
   /// Robot hardware interface node
   std::shared_ptr<rclcpp::Node> node_;
-
-  /// Thread
-  // std::shared_ptr<rclcpp::executors::MultiThreadedExecutor> node_executor_;
 
 private:
   /// Hardware interface
@@ -157,4 +162,4 @@ private:
 };
 }  // namespace scout_mini_hardware
 
-#endif  // SCOUT_MINI_HARDWARE__SCOUt_MINI_HAREWARE_HPP_
+#endif  // SCOUT_MINI_HARDWARE__SCOUT_MINI_HAREWARE_HPP_

@@ -92,7 +92,7 @@ hardware_interface::CallbackReturn ScoutMiniHardware::on_init(const hardware_int
   rp_robot_state_ =
       std::make_shared<realtime_tools::RealtimePublisher<scout_mini_msgs::msg::RobotState>>(pub_robot_state_);
   sub_led_cmd_ = node_->create_subscription<scout_mini_msgs::msg::LightCommand>(
-      "scout_mini/light_command", rclcpp::QoS(10),
+      "scout_mini/light/command", rclcpp::QoS(10),
       [=](const scout_mini_msgs::msg::LightCommand::SharedPtr msg) { lightCmdCallback(msg); });
 
   // Initialize SocketCan
@@ -321,11 +321,11 @@ void ScoutMiniHardware::receive()
         case 0x221:  // velocity
           velocity(data);
           break;
-          // case 0x311:  // position
-          //   position(data);
-          //   break;
-          // default:
-          //   break;
+        // case 0x311:  // position
+        //   position(data);
+        //   break;
+        default:
+          break;
       }
     }
     catch (const std::exception& ex)
@@ -344,7 +344,6 @@ void ScoutMiniHardware::robotState(uint8_t* data)
   else if (data[0] == 0x02)
     rp_robot_state_->msg_.normal_state = false;
 
-  // TODO: check the unknown bug
   if (data[1] == 0x00)
     rp_robot_state_->msg_.control_mode = "IDLE";
   else if (data[1] == 0x01)
@@ -356,6 +355,15 @@ void ScoutMiniHardware::robotState(uint8_t* data)
 
   rp_robot_state_->msg_.battery_voltage =
       static_cast<int16_t>((static_cast<uint16_t>(data[2]) << 8) | static_cast<uint16_t>(data[3])) / 10.0;
+
+  rp_robot_state_->msg_.fault_state.battery_under_voltage_failure = std::bitset<8>(data[5])[0];
+  rp_robot_state_->msg_.fault_state.battery_under_voltage_alarm = std::bitset<8>(data[5])[1];
+  rp_robot_state_->msg_.fault_state.loss_remote_control = std::bitset<8>(data[5])[2];
+
+  rp_driver_state_->msg_.communication_failure[2] = std::bitset<8>(data[5])[3];
+  rp_driver_state_->msg_.communication_failure[0] = std::bitset<8>(data[5])[4];
+  rp_driver_state_->msg_.communication_failure[1] = std::bitset<8>(data[5])[5];
+  rp_driver_state_->msg_.communication_failure[3] = std::bitset<8>(data[5])[6];
 }
 
 void ScoutMiniHardware::motorState(size_t index, uint8_t* data)
@@ -414,8 +422,8 @@ void ScoutMiniHardware::velocity(uint8_t* data)
   double angular =
       static_cast<int16_t>((static_cast<uint16_t>(data[2]) << 8) | static_cast<uint16_t>(data[3])) / 1000.0;
 
-  double left = (linear - (angular * 0.490 * 0.5)) / wheel_radius_;
-  double right = (linear + (angular * 0.490 * 0.5)) / wheel_radius_;
+  double left = (linear - (angular * wheel_separation_ * 0.5)) / wheel_radius_;
+  double right = (linear + (angular * wheel_separation_ * 0.5)) / wheel_radius_;
 
   rp_motor_state_->msg_.velocity[0] = left;
   rp_motor_state_->msg_.velocity[1] = left;

@@ -3,5 +3,5 @@ uint8 NO = 1
 uint8 BL = 2
 uint8 CUSTOM = 3
 
-uint8 mode               # Lighting Mode
+uint8 mode        # Lighting Mode
 uint8 brightness  # Only for CUSTOM mode
